@@ -1,0 +1,14 @@
+[
+     {
+          "workout_id": 1,
+          "exercise": "triceps",
+          "duration": 90,
+          "calories": 500
+     },
+     {
+          "workout_id": 2,
+          "exercise": "Back",
+          "duration": 40,
+          "calories": 200
+     }
+]
