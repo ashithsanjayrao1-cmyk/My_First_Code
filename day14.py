@@ -1,17 +1,21 @@
-# # class Phone:
-# #     def make_call(self):
-# #         print("Ringing ....Hellloo?")
+###oops###
 
-# # class Smartphone(Phone):
-# #     def browse_internet(self):
-# #         print("Opening Google chrome...")
+# class Phone:
+#     def make_call(self):
+#         print("Ringing ....Hellloo?")
+
+# class Smartphone(Phone):
+#     def browse_internet(self):
+#         print("Opening Google chrome...")
 
 
-# # my_iphone = Smartphone()
+# my_iphone = Smartphone()
 
-# # my_iphone.browse_internet()
+# my_iphone.browse_internet()
 
-# # my_iphone.make_call()
+# my_iphone.make_call()
+
+###inheritance#####
 # class BankAccount:
 #     def __init__(self,account_holder,starting_balance):
 #         self.owner= account_holder
@@ -37,6 +41,7 @@
 # my_savings.add_interest()
 
 
+###polymorphism###
 
 class Email:
     def send(self,message):

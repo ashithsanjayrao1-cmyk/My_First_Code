@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fullstack Task App</title>
+    <style>
+        /* This is the CSS (The Paint) */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 50px; text-align: center; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        input { padding: 10px; width: 70%; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #218838; }
+        ul { list-style-type: none; padding: 0; margin-top: 20px; }
+        li { background: #eee; margin: 5px 0; padding: 10px; border-radius: 5px; text-align: left;}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🚀 My Cloud Task List</h2>
+        
+        <input type="text" id="taskInput" placeholder="Type a new task here...">
+        <button onclick="addTask()">Add Task</button>
+
+        <ul id="taskList">
+            </ul>
+    </div>
+
+    <script>
+        // --- THIS IS THE JAVASCRIPT (The Brains) ---
+        
+        // 🚨 CRITICAL: REPLACE THIS URL WITH YOUR ACTUAL RENDER URL!
+        // Do not leave a slash (/) at the very end of the URL.
+        const RENDER_API_URL = "https://my-first-api-1evm.onrender.com";
+        // 1. The Phone Call to READ tasks (GET)
+        async function fetchTasks() {
+            // We call the cloud server...
+            const response = await fetch(`${RENDER_API_URL}/tasks`);
+            const tasks = await response.json();
+            
+            // We clear the old list and put the new database items on the screen!
+            const list = document.getElementById("taskList");
+            list.innerHTML = ""; 
+            tasks.forEach(task => {
+                let li = document.createElement("li");
+                li.innerText = `ID ${task.id}: ${task.title}`;
+                list.appendChild(li);
+            });
+        }
+
+        // 2. The Phone Call to CREATE a task (POST)
+        async function addTask() {
+            const inputField = document.getElementById("taskInput");
+            const newTaskTitle = inputField.value;
+
+            if (newTaskTitle === "") {
+                alert("Please type a task first!");
+                return;
+            }
+
+            // We package the data just like Pydantic wants it
+            const taskData = {
+                title: newTaskTitle,
+                is_completed: false
+            };
+
+            // We send the POST request to the cloud
+            await fetch(`${RENDER_API_URL}/add-task`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(taskData)
+            });
+
+            // Clear the text box and refresh the list to show the new task!
+            inputField.value = "";
+            fetchTasks(); 
+        }
+
+        // As soon as the page loads, fetch the tasks immediately.
+        fetchTasks();
+    </script>
+
+</body>
+</html>

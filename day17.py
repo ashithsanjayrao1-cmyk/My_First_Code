@@ -26,11 +26,8 @@ class TaskBlueprint(BaseModel):
 
 @app.get("/")
 def get_home_page():
-    print("type /tasks to see the tasks")
     return "Welcome to the page which u want to know the task cpmpleted or not"
     
-
-
 
 @app.get("/tasks")
 def get_all_tasks():
